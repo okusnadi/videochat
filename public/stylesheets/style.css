@@ -1,0 +1,40 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#canvas{
+    display: none;
+}
+
+#image{
+    width: 600px;
+    height: 450px;
+    border: 2px solid grey;
+}
+
+.viewContainer{
+    position: relative;
+    width: 600px;
+    height: 450px;
+    margin-bottom: 20px;
+}
+
+.viewContainer .videoContainer{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    box-shadow: 1px 1px 2px #888888;
+}
+
+button{
+    background: #369;
+    color: white;
+    border: 0px;
+    padding: 5px;
+    border-radius: 4px;
+}
