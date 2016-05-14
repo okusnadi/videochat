@@ -7,16 +7,12 @@
 var app = require('../app');
 var debug = require('debug')('videochat:server');
 var http = require('http');
-
 var https = require('https');
 
-const crypto = require('crypto'),
-  fs = require("fs");
-
-var sslOptions = {
+/*var sslOptions = {
   key: fs.readFileSync('privatekey.pem'),
   cert: fs.readFileSync('certificate.pem'),
-};
+};*/
 
 /**
  * Get port from environment and store in Express.
@@ -29,7 +25,8 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = https.createServer(sslOptions, app);
+var server = http.createServer(app);
+//var server = https.createServer(sslOptions, app);
 var io = require('socket.io').listen(server);
 require('../server/socket/serverSocket.js')(io);
 
