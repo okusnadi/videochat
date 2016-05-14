@@ -14,8 +14,8 @@ const crypto = require('crypto'),
   fs = require("fs");
 
 var sslOptions = {
-  key: fs.readFileSync('/home/ubuntu/.appkeys/nodejs/privatekey.pem'),
-  cert: fs.readFileSync('/home/ubuntu/.appkeys/nodejs/certificate.pem'),
+  key: fs.readFileSync('privatekey.pem'),
+  cert: fs.readFileSync('certificate.pem'),
 };
 
 /**
