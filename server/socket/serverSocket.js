@@ -9,15 +9,13 @@ var io = function (io) {
             console.log("user id  %s disconnected", socket.id);
         });
         
-        /* play event */
-        socket.on('test', function(){
-            console.log("received test event")
-            socket.broadcast.emit('msg', "hello");
-        });
-        
         /* call */
         socket.on('newCall', function(msg){
             socket.broadcast.emit('newCall', msg);
+        });
+        
+        socket.on('_newCall', function(msg){
+            socket.broadcast.emit('_newCall', msg);
         });
         
         socket.on('endCall', function(msg){

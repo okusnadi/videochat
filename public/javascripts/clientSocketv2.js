@@ -1,6 +1,6 @@
 (function(){
     /* declare variables */
-    var socket, canvas, context, video, vendorUrl,
+    var socket = io(), canvas, context, video, vendorUrl,
         startCall, stopCall, acceptCall, rejectCall,
         media, WIDTH, HEIGHT,
         call, oncall;
@@ -8,7 +8,6 @@
     
     /* define init */    
     function init(){
-        socket = io();
         canvas = document.getElementById('canvas');
         context = canvas.getContext('2d');
         video = document.getElementById('video');
@@ -30,11 +29,17 @@
         /* event handlers */
         startCall.onclick = joinCall;
         stopCall.onclick = stopVideo;
-        test.onclick = testEmit;
         
         /* socket events */
         socket.on('newCall', function(videostream){
             !image.src ? (image.src = "images/chat-app.png") : (image.src = videostream);
+            if (oncall)
+                socket.emit('_newCall', canvas.toDataURL('image/webp', 0.3));
+        });
+        
+        socket.on('_newCall', function(videostream){
+            if (oncall)
+                !image.src ? (image.src = "images/chat-app.png") : (image.src = videostream);
         });
         
         socket.on('call', function(data){
@@ -56,6 +61,7 @@
         
         socket.on('endCall', function(data){
             image.src = "images/chat-app.png";
+            oncall = false;
         });
         
         media = null;
@@ -96,10 +102,10 @@
     var stopVideo = function(){
         console.log("stopping call")
         oncall = false;
-        media.map(function(track){track.stop()});
+        //media.map(function(track){track.stop()});
         socket.emit('endCall', "images/chat-app.png");
-        image.src = null;
-        init();
+        //image.src = null;
+        //init();
     }
     
     init();
